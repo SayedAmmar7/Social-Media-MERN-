@@ -5,6 +5,7 @@ const authRouter = require("./routers/authRouter");
 const morgan = require("morgan");
 const postsRouter = require("morgan");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
 dotenv.config("./.env");
 
@@ -15,6 +16,12 @@ app.use(express.json());
 app.use(morgan("common"));
 
 app.use(cookieParser());
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:3000",
+  })
+);
 
 app.use("/auth", authRouter);
 app.use("/posts", postsRouter);
